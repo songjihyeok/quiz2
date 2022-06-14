@@ -21,7 +21,6 @@ import App from '@src/App';
 
 ReactDOM.render(
 	<StrictMode>
-		<ConfigProvider locale={koKR} virtual getPopupContainer={(node) => (node ? (node.parentNode as HTMLElement) : document.body)}>
 			<ApolloProvider client={apolloClient}>
 				<ThemeProvider theme={{ ...theme, mobileMedia: `(max-width: ${theme.mobile})`, headerMedia: `(max-width: ${theme.responseHeader})` }}>
 					<ResponseProvider>
@@ -31,7 +30,7 @@ ReactDOM.render(
 					</ResponseProvider>
 				</ThemeProvider>
 			</ApolloProvider>
-		</ConfigProvider>
+
 	</StrictMode>,
 	document.getElementById('root')
 );

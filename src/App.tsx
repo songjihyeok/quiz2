@@ -4,7 +4,6 @@ import { Routes, Route } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 
 import { routes } from '@src/router';
-import { Footer } from '@src/layouts';
 
 function getRoutes(route: RouteObject): ReactElement {
 	if (route.children) {
@@ -27,8 +26,6 @@ export default function App(): ReactElement {
 					return getRoutes(route);
 				})}
 			</Routes>
-			{/* Footer layout */}
-			<Footer />
 		</Layout>
 	);
 }
