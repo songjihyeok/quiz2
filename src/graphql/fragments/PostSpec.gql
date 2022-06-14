@@ -1,0 +1,10 @@
+fragment PostSpec on InboxPost {
+	id
+	postCtgr
+	postDate
+	postTime
+	postTitle
+	postThumbnailUrl
+	postContent
+	postAddData
+}

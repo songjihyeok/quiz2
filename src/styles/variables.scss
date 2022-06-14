@@ -1,0 +1,279 @@
+// // 전역으로 사용할 sass 변수를 지정합니다.
+// // 수정후 재시작시 적용됩니다.
+
+// // color palettes
+// // refs = https://github.com/ant-design/ant-design/blob/master/components/style/color/colors.less
+
+// // antd override
+$blue-base: #156aff;
+$red-base: #e52f2f;
+$green-base: #08b468;
+$purple-base: #6400ff;
+
+// custom palettes
+// grey
+$light-grey-1: #f2f3f5;
+$light-grey-2: #ebedef;
+$light-grey-3: #d6d7da;
+$grey-1: #afb4b9;
+$grey-2: #93989c;
+$grey-3: #73767a;
+$grey-4: #6f7276;
+$dark-grey-1: #535659;
+
+// yellow
+$yellow-1: #ff9f20;
+
+// $dark-grey-2: #444a5e;
+$dark-grey-3: #1d1e1f;
+
+// // ant-component에 주입될 변수를 선언합니다.
+// // https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
+
+// -------- Colors -----------
+$primary-color: $purple-base;
+$white: #ffffff;
+$black: #000000;
+
+// Error
+$error-color: $red-base;
+
+// Font
+$font-family: 'Regular', 'Sans-serif';
+$text-color: $dark-grey-3;
+$font-size-base: 16px;
+$font-size-lg: 18px;
+
+$font-size-sm: 14px;
+
+$font-family-title: 'Bold'; // custom
+$font-family-medium: 'Medium'; // custom
+
+// Heading Title <h1>, ...<h5>
+// gap 12px => 6px => 4px => 2px
+$heading-1-size: 40px;
+$heading-2-size: 28px;
+$heading-3-size: 22px;
+$heading-4-size: $font-size-lg;
+$heading-5-size: $font-size-base;
+
+$font-weight: 400;
+$text-color-secondary: $text-color;
+
+// Outline
+$outline-width: 0;
+$outline-fade: 0;
+
+// // Base Scaffolding Variables
+$border-radius-base: 6px;
+$border-radius-sm: 4px;
+
+$height-base: 52px;
+$height-lg: 56px;
+$height-sm: 44px;
+
+$line-height-base: 1.5;
+// $height-base: 40px;
+// $height-lg: 48px;
+// $heading-color: $text-color;
+// $background-color-light: $light-grey-1;
+// $background-color-base: $light-grey-2;
+
+// Typography
+$typography-title-font-weight: 400;
+$typography-title-margin-top: 0;
+$typography-title-margin-bottom: 0;
+
+// Layout
+$layout-body-background: $white;
+$layout-header-background: $white;
+$layout-header-height-mobile: 64px; // custom
+$layout-header-height: 96px;
+$layout-header-padding: 0 0px;
+
+// Response Size
+$max-width: 1440px; // custom
+$mobile: 992px; // custom
+$response-header: $max-width; // custom
+
+// // Disabled states
+$disabled-color: $grey-2;
+$disabled-bg: $light-grey-1;
+
+// // vertical paddings
+$padding-xl: 32px; // custom variable
+// $padding-lg: 24px; // containers
+$padding-md: 14px; // small containers and buttons
+$padding-sm: 12px; // Form controls and items
+// $padding-xs: 8px; // small items
+// $padding-xss: 4px; // more small
+
+// Layout
+$layout-body-background: $white;
+
+// // Border color
+$border-color-base: $light-grey-3; // base border outline a component
+$border-color-split: $light-grey-2; // split border inside a component
+
+// Buttons
+$btn-border-radius-base: $border-radius-sm;
+
+$btn-border-radius-sm: $border-radius-sm;
+$btn-shadow: none;
+$btn-primary-shadow: none;
+$btn-text-shadow: none;
+
+$btn-disable-bg: $white;
+$btn-disable-border: rgba($border-color-base, 0.25);
+
+$btn-default-ghost-color: $primary-color;
+$btn-default-ghost-bg: transparent;
+$btn-default-ghost-border: $primary-color;
+
+$btn-padding-horizontal-base: $padding-md - 1px;
+$btn-padding-horizontal-lg: $padding-md;
+$btn-padding-horizontal-sm: $padding-sm - 2px;
+
+$btn-text-hover-bg: transparent;
+
+// Form
+$label-color: $dark-grey-1;
+$form-item-margin-bottom: 24px;
+$form-item-label-font-size: 15px;
+$form-item-label-height: 24px;
+
+// // Input
+// $input-padding-vertical-base: 10px;
+// $input-placeholder-color: $grey-2;
+// $input-icon-color: $grey-2;
+
+// // Select
+// $select-item-selected-font-weight: $font-weight;
+
+// // Button
+// $btn-default-ghost-color: $text-color;
+// $btn-default-ghost-bg: $background-color-base;
+// $btn-default-ghost-border: transparent;
+
+// $btn-border-radius-sm: $border-radius-sm;
+// $btn-height-sm: 28px;
+// $btn-font-size-sm: $font-size-sm;
+
+// // Switch
+// $switch-disabled-opacity: 0.3;
+
+// // Menu navigation을 제외한 menu component에서 사용
+// $menu-inline-toplevel-item-height: 48px;
+// $menu-item-height: 48px;
+// $menu-item-group-height: 48px;
+// $menu-highlight-color: $dark-grey-3;
+// $menu-item-active-bg: $bg-blue;
+// $menu-item-active-border-width: 0;
+// $menu-item-font-size: 16px;
+// $menu-item-padding: 0 12px;
+// $menu-item-boundary-margin: 4px;
+// $menu-icon-size: 21px;
+// $menu-item-group-title-font-size: 16px;
+// $menu-icon-margin-right: 15.5px;
+
+// // Menu dark them = navigation에서 사용
+// $menu-dark-color: $text-color;
+// $menu-dark-bg: transparent;
+// $menu-dark-arrow-color: transparent;
+// $menu-dark-inline-submenu-bg: transparent;
+// $menu-dark-highlight-color: $primary-color;
+// $menu-dark-item-active-bg: $bg-blue;
+// $menu-dark-selected-item-icon-color: $primary-color;
+// $menu-dark-selected-item-text-color: $primary-color;
+// $menu-dark-item-hover-bg: $bg-blue;
+
+// // Card
+// $card-head-padding: 24px;
+// $card-padding-base: 20px;
+// $card-skeleton-bg: $grey-3;
+
+// // Modal
+// $modal-header-title-line-height: 1.3;
+// $modal-header-title-font-size: $heading-4-size;
+// $modal-body-padding: $padding-md;
+
+// // Badge
+// $badge-dot-size: 10px;
+// $badge-status-size: 10px;
+
+// // PageHeader
+// $page-header-padding: $padding-md;
+// $page-header-padding-vertical: $padding-xs;
+
+// // Table
+// $table-header-bg: $light-grey-1;
+// $table-header-color: $text-color;
+// $table-row-hover-bg: $bg-blue; // need convert rgba
+// $table-expanded-row-bg: $bg-blue; // need convert rgba
+// $table-padding-vertical: 12px;
+// $table-padding-horizontal: $padding-md;
+// $table-border-color: $light-grey-3;
+// $table-border-radius-base: $border-radius-sm;
+// $table-header-cell-split-color: $light-grey-3;
+
+// // Drawer
+
+// // PageHeader
+// $page-header-padding: 0;
+// $page-header-padding-vertical: 0;
+// $page-header-padding-breadcrumb: 0;
+// $page-header-content-padding-vertical: 0;
+// $page-header-heading-title: $heading-3-size;
+
+// // Alert
+// // ---
+// $alert-success-border-color: $bg-green;
+// $alert-success-bg-color: $bg-green;
+// $alert-success-icon-color: $green-base;
+
+// $alert-info-border-color: $bg-blue;
+// $alert-info-bg-color: $bg-blue;
+// $alert-info-icon-color: $blue-base;
+
+// $alert-warning-border-color: $bg-yellow;
+// $alert-warning-bg-color: $bg-yellow;
+// $alert-warning-icon-color: $yellow-base;
+
+// $alert-error-border-color: $bg-red;
+// $alert-error-bg-color: $bg-red;
+// $alert-error-icon-color: $red-base;
+
+// $alert-message-color: $text-color;
+// $alert-text-color: $text-color;
+
+// $alert-close-color: $dark-grey-1;
+// $alert-close-hover-color: $dark-grey-1;
+
+// $alert-no-icon-padding-vertical: 14px;
+// $alert-with-description-no-icon-padding-vertical: 14px;
+// $alert-with-description-padding-vertical: 14px;
+// $alert-with-description-padding: 14px 16px 14px 17px;
+// $alert-icon-top: 8px + 14px * (1.3 / 2) - (14px / 2);
+// $alert-with-description-icon-size: 22px;
+
+// // Divider
+// $divider-color: $light-grey-3;
+
+// // Tabs
+// $tabs-ink-bar-color: $dark-grey-3;
+// $tabs-highlight-color: $dark-grey-3;
+// $tabs-hover-color: $dark-grey-3;
+// $tabs-active-color: $dark-grey-3;
+
+// // picker
+// $picker-basic-cell-active-with-range-color: $bg-grey;
+// $picker-basic-cell-hover-with-range-color: $bg-grey;
+// $picker-basic-cell-disabled-bg: transparent;
+// $picker-date-hover-range-border-color: $bg-grey;
+// $picker-panel-cell-height: 40px;
+// $picker-panel-cell-width: 40px;
+// $picker-text-height: 40px;
+
+// // Tag
+// $tag-default-bg: $light-grey-2;
+// $tag-default-color: $dark-grey-1;

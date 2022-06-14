@@ -1,0 +1,17 @@
+query List($size: Int!, $page: Int!, $category: String!) {
+	inboxPostsByCategory(category: $category, size: $size, page: $page) {
+		posts {
+			id
+			postCtgr
+			postDate
+			postTime
+			postTitle
+			postThumbnailUrl
+			postContent
+			postAddData
+		}
+		total
+		size
+		page
+	}
+}

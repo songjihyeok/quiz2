@@ -1,0 +1,86 @@
+
+  import 'styled-components';
+  
+  declare module 'styled-components' {
+    export interface DefaultTheme {
+  blueBase: string;
+  redBase: string;
+  greenBase: string;
+  purpleBase: string;
+  lightGrey1: string;
+  lightGrey2: string;
+  lightGrey3: string;
+  grey1: string;
+  grey2: string;
+  grey3: string;
+  grey4: string;
+  darkGrey1: string;
+  yellow1: string;
+  darkGrey3: string;
+  primaryColor: string;
+  white: string;
+  black: string;
+  errorColor: string;
+  fontFamily: string;
+  textColor: string;
+  fontSizeBase: string;
+  fontSizeLg: string;
+  fontSizeSm: string;
+  fontFamilyTitle: string;
+  fontFamilyMedium: string;
+  heading1Size: string;
+  heading2Size: string;
+  heading3Size: string;
+  heading4Size: string;
+  heading5Size: string;
+  fontWeight: string;
+  textColorSecondary: string;
+  outlineWidth: string;
+  outlineFade: string;
+  borderRadiusBase: string;
+  borderRadiusSm: string;
+  heightBase: string;
+  heightLg: string;
+  heightSm: string;
+  lineHeightBase: string;
+  typographyTitleFontWeight: string;
+  typographyTitleMarginTop: string;
+  typographyTitleMarginBottom: string;
+  layoutBodyBackground: string;
+  layoutHeaderBackground: string;
+  layoutHeaderHeightMobile: string;
+  layoutHeaderHeight: string;
+  layoutHeaderPadding: string;
+  maxWidth: string;
+  mobile: string;
+  responseHeader: string;
+  disabledColor: string;
+  disabledBg: string;
+  paddingXl: string;
+  paddingMd: string;
+  paddingSm: string;
+  borderColorBase: string;
+  borderColorSplit: string;
+  btnBorderRadiusBase: string;
+  btnBorderRadiusSm: string;
+  btnShadow: string;
+  btnPrimaryShadow: string;
+  btnTextShadow: string;
+  btnDisableBg: string;
+  btnDisableBorder: string;
+  btnDefaultGhostColor: string;
+  btnDefaultGhostBg: string;
+  btnDefaultGhostBorder: string;
+  btnPaddingHorizontalBase: string;
+  btnPaddingHorizontalLg: string;
+  btnPaddingHorizontalSm: string;
+  btnTextHoverBg: string;
+  labelColor: string;
+  formItemMarginBottom: string;
+  formItemLabelFontSize: string;
+  formItemLabelHeight: string;
+  mobileMedia: string;
+  headerMedia: string;
+}
+
+  }
