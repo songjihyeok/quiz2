@@ -20,7 +20,9 @@ const Content = styled(Layout.Content)(({ theme }) => {
 		"&&": {
 			height: "100vh",
 			margin: "0 auto",
-			minWidth: 450,
+			maxWidth: 500,
+			minWidth: 350,
+			width: "100%",
 			background: `url(${background})`,
 			backgroundRepeat: "no-repeat",
 			backgroundSize: "100% 100%"

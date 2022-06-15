@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Join from "@src/assets/images/join.png"
 import { useNavigate } from 'react-router-dom';
 import { db } from '@src/firebaseConfig'
-import { collection, doc, getDocs, getDoc, addDoc, query, where } from 'firebase/firestore/lite';
+import { doc, getDoc } from 'firebase/firestore/lite';
 const { Title } = Typography
 
 export default function BeforeStart() {
@@ -22,7 +22,6 @@ export default function BeforeStart() {
   }
 
   const checkProblemPossible = async () => {
-    console.log("problemNunber", localProblemNumber)
     const problemRef = doc(db, "problem", localProblemNumber.toString());
     const docSnap = await getDoc(problemRef);
     if (docSnap.exists()) {
