@@ -8,24 +8,23 @@ import background from "@src/assets/images/background.jpg"
 export default function FullLayout(): ReactElement {
 	return (
 		<Layout>
-			<Layout.Content>
-				<Row>
-					<MobileCol span={24}>
-						<Outlet />
-					</MobileCol>
-				</Row>
-			</Layout.Content>
+			<Content>
+				<Outlet />
+			</Content>
 		</Layout>
 	);
 }
 
-const MobileCol = styled(Col)(({ theme }) => {
+const Content = styled(Layout.Content)(({ theme }) => {
 	return {
 		"&&": {
-			maxWidth: 400,
+			height: "100vh",
 			margin: "0 auto",
-			background: `url(${require('@src/assets/images/background.jpg')})`,
-			backgroundRepeat: 'no-repeat',
+			minWidth: 450,
+			background: `url(${background})`,
+			backgroundRepeat: "no-repeat",
+			backgroundSize: "100% 100%"
 		}
 	}
 })
+
