@@ -6,6 +6,7 @@ import { collection, updateDoc, getDocs, query, where } from 'firebase/firestore
 import { db } from '@src/firebaseConfig'
 // import local modules : 지역(route)에서 사용중인 모듈을 선언하세요.
 import { doc, getDoc } from 'firebase/firestore/lite';
+import { service } from '@src/configs'
 
 export default function Problem() {
 
@@ -19,19 +20,36 @@ export default function Problem() {
       querySnapshot.forEach((doc: any) => {
         result.push(doc.data())
       });
+      result.sort((a, b) => {
+        if (a.id > b.id) {
+          return 1
+        } else if (a.id < b.id) {
+          return -1
+        }
+        return 0
+      })
       setData(result)
     }
     getProblemData()
   }, [])
 
-  const onChangeValid = async (valid: boolean, id: number) => {
-    console.log(`switch to ${id}`);
 
+
+  const onChangeValid = async (valid: boolean, record: any) => {
+
+    const id = record.id
     if (id) {
       const problemDocRef = doc(db, "problem", id.toString());
       await updateDoc(problemDocRef, {
         valid: !valid
       })
+      const modifiedData = data.map((element: any) => {
+        if (element.id === id) {
+          return { ...record, valid: !valid }
+        }
+        return element
+      })
+      setData([...modifiedData])
     }
   };
 
@@ -45,11 +63,9 @@ export default function Problem() {
     {
       key: 'valid',
       title: '열기',
-      dataIndex: ['valid'],
+      dataIndex: 'valid',
       render: (valid: boolean, record: any) => {
-        console.log(valid)
-        const id = record.id
-        return <Switch defaultChecked={valid} onChange={() => onChangeValid(valid, id)}></Switch>
+        return <Switch checked={valid} onChange={() => onChangeValid(valid, record)}></Switch>
       }
     },
 

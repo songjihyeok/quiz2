@@ -16,12 +16,12 @@ export default function LoginForm() {
     layout: 'vertical',
     autoComplete: 'off',
     onFinish(fields: any) {
-      if (fields.username !== "a01096339134@gmail.com" || fields.password !== "Maka9134!!") {
-        message.error('아이디나 비번이 틀립니다.');
-      } else {
-        localStorage.setItem('authorization', "admin");
-        navigate('/dashboard');
-      }
+      // if (fields.username !== "a01096339134@gmail.com" || fields.password !== "Maka9134!!") {
+      //   message.error('아이디나 비번이 틀립니다.');
+      // } else {
+      localStorage.setItem('authorization', "admin");
+      navigate('/dashboard');
+      // }
     },
   };
 

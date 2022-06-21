@@ -70,8 +70,8 @@ export default function BeforeStart() {
     <BeforeStartRow>
       <BeforeStartCol span={24}>
         <Title>버튼을 눌러서</Title>
-        <Title>문제풀이에 참여해주세요</Title>
-
+        <Title>문제풀이에 </Title>
+        <Title>참여해주세요</Title>
         <Image src={Join} preview={false} onClick={onClickJoin}></Image>
       </BeforeStartCol>
     </BeforeStartRow>

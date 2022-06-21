@@ -2,9 +2,11 @@
 import { Row, Col, Radio, Table } from 'antd';
 import styled from 'styled-components';
 import { useState, useEffect } from "react"
-import { doc, getDocs, collection } from 'firebase/firestore/lite';
+import { doc, getDocs, getDoc, collection } from 'firebase/firestore/lite';
 import { db } from '@src/firebaseConfig'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 import dayjs from "dayjs"
+dayjs.extend(customParseFormat)
 export default function Times() {
 
   const [problem, setProblem] = useState("1")
@@ -14,6 +16,8 @@ export default function Times() {
   const onChangeProblem = (e: any) => {
     setProblem(e.target.value)
   }
+
+
 
   const columns = [
     {
@@ -27,6 +31,11 @@ export default function Times() {
       dataIndex: ['number'],
     },
     {
+      key: 'selected',
+      title: '선택한 번호',
+      dataIndex: ['selected'],
+    },
+    {
       key: 'createdTime',
       title: '생성시간',
       dataIndex: ['createdTime'],
@@ -36,14 +45,34 @@ export default function Times() {
   useEffect(() => {
     const getTimeData = async () => {
       const timeRef = collection(db, "problem", problem, "user")
+      // const problemRef = doc(db, "problem", problem);
+
       const querySnapshot = await getDocs(timeRef)
+      // const problemSnap = await getDoc(problemRef)
+
+      // const currentProblemData = problemSnap.data()
+
+
+
+
+
       let data: any[] = []
       querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
         data.push(doc.data())
       });
+
+
+
       const sortedData = data.sort((a, b) => {
-        const isBefore = dayjs(a.createdTime).isBefore(dayjs(b.createdTime))
+
+        const AcreatedTime = dayjs(a.createdTime, "YYYY-MM-DD-HH:mm:ss")
+        const BcreatedTime = dayjs(b.createdTime, "YYYY-MM-DD-HH:mm:ss")
+
+        const isBefore = dayjs(AcreatedTime).isBefore(BcreatedTime)
+        if (a.createdTime === b.createdTime) {
+          return 0
+        }
+
         if (isBefore) {
           return -1
         } else {
@@ -52,19 +81,35 @@ export default function Times() {
       })
       setData(sortedData)
     }
-
     getTimeData()
   }, [problem])
 
-  console.log(data)
+
+
+
 
 
   return (
     <Row>
       <Col span={24}>
-        <Radio.Group defaultValue={problem} size="large" onChange={onChangeProblem}>
+
+        <Radio.Group defaultValue={problem} size="large" onChange={onChangeProblem} style={{ marginBottom: 30 }}>
           <Radio.Button value="1">문제 1번</Radio.Button>
           <Radio.Button value="2">문제 2번</Radio.Button>
+          <Radio.Button value="3">문제 3번</Radio.Button>
+          <Radio.Button value="4">문제 4번</Radio.Button>
+          <Radio.Button value="5">문제 5번</Radio.Button>
+          <Radio.Button value="6">문제 6번</Radio.Button>
+          <Radio.Button value="7">문제 7번</Radio.Button>
+          <Radio.Button value="8">문제 8번</Radio.Button>
+          <Radio.Button value="9">문제 9번</Radio.Button>
+          <Radio.Button value="10">문제 10번</Radio.Button>
+          <Radio.Button value="11">문제 11번</Radio.Button>
+          <Radio.Button value="12">문제 12번</Radio.Button>
+          <Radio.Button value="13">문제 13번</Radio.Button>
+          <Radio.Button value="14">문제 14번</Radio.Button>
+          <Radio.Button value="15">문제 15번</Radio.Button>
+
         </Radio.Group>
         <Table dataSource={data} columns={columns}></Table>
       </Col>
