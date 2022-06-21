@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 const service = {
 	// object find value
 	getValue: (obj: any | undefined, key: string, defaultValue?: any | undefined): any => {

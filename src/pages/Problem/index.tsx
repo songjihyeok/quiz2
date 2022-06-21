@@ -10,6 +10,7 @@ import type { RadioChangeEvent } from 'antd';
 import ButtonWapper from "@src/assets/images/buttonCover.png"
 import { setDoc, updateDoc, addDoc, query, where } from 'firebase/firestore/lite';
 import dayjs from "dayjs"
+import { service } from '@src/configs'
 
 import { Radio } from 'antd';
 
@@ -32,15 +33,24 @@ export default function Problem() {
 
     if (userId && localProblemNumber) {
       const userDocRef = doc(db, "users", userId);
+
+      const userDocSnapshot = await getDoc(userDocRef)
+      const result = userDocSnapshot.data()
+      const userProblemStatus = service.getValue(result, "userProblemStatus", {})
+
+      const addedUserProblemStatus = { ...userProblemStatus, [localProblemNumber]: { selected, createdTime: dayjs().format("YYYY-MM-DD-HH:mm:ss") } }
+
+
       await updateDoc(userDocRef, {
+        userProblemStatus: addedUserProblemStatus,
         problemNumber: isLast ? Number(localProblemNumber) : Number(localProblemNumber) + 1,
       })
       const userSnap = await getDoc(userDocRef);
       if (userSnap.exists()) {
         const { name, number } = userSnap.data()
         const userProblemDocRef = doc(db, "problem", localProblemNumber, "user", userId);
-
         await setDoc(userProblemDocRef, {
+          userProblemStatus: addedUserProblemStatus,
           id: userId,
           name,
           number,

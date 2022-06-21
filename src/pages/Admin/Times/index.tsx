@@ -6,6 +6,7 @@ import { doc, getDocs, getDoc, collection } from 'firebase/firestore/lite';
 import { db } from '@src/firebaseConfig'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import dayjs from "dayjs"
+import { service } from '@src/configs'
 dayjs.extend(customParseFormat)
 export default function Times() {
 
@@ -36,6 +37,19 @@ export default function Times() {
       dataIndex: ['selected'],
     },
     {
+      key: 'answer',
+      title: '문제 답',
+      dataIndex: ['answer'],
+    },
+    {
+      key: 'isCorrect',
+      title: '정답여부',
+      dataIndex: ['isCorrect'],
+      render: (value: boolean) => {
+        return <div>{value ? "맞음" : "틀림"}</div>
+      }
+    },
+    {
       key: 'createdTime',
       title: '생성시간',
       dataIndex: ['createdTime'],
@@ -45,20 +59,36 @@ export default function Times() {
   useEffect(() => {
     const getTimeData = async () => {
       const timeRef = collection(db, "problem", problem, "user")
-      // const problemRef = doc(db, "problem", problem);
+      const problemRef = doc(db, "problem", problem);
 
       const querySnapshot = await getDocs(timeRef)
-      // const problemSnap = await getDoc(problemRef)
 
-      // const currentProblemData = problemSnap.data()
+      const problemSnap = await getDoc(problemRef)
 
-
+      const currentProblemData = problemSnap.data()
+      const answer = service.getValue(currentProblemData, "answer", 0)
+      console.log("answer", answer)
 
 
 
       let data: any[] = []
       querySnapshot.forEach((doc) => {
-        data.push(doc.data())
+        const userData = doc.data()
+        const userAnswer = userData.selected
+        const userStatus = userData.userProblemStatus
+
+        const everage = Object.keys(userStatus).reduce((result: any, current: any) => {
+
+
+          return result
+        }, 0)
+
+
+        const isCorrect = userAnswer === answer
+
+        const userObject = { ...userData, answer: answer, isCorrect }
+
+        data.push(userObject)
       });
 
 

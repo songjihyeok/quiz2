@@ -33,10 +33,10 @@ export default function Home() {
 			const querySnapshot = await getDocs(q);
 			const findResult = getFindResult(querySnapshot)
 
-			console.log("findResult", findResult)
+
 			if (findResult.length === 0) {
 				const usersAddRef = await addDoc(collection(db, "users"), {
-					name, number, problemNumber: 1
+					name, number, problemNumber: 1, userProblemStatus: {}
 				});
 				window.localStorage.setItem("userId", usersAddRef.id)
 			} else {
