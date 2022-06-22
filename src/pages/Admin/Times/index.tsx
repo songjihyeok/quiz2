@@ -50,6 +50,11 @@ export default function Times() {
       }
     },
     {
+      key: 'everage',
+      title: '평균',
+      dataIndex: ['everage']
+    },
+    {
       key: 'createdTime',
       title: '생성시간',
       dataIndex: ['createdTime'],
@@ -60,33 +65,20 @@ export default function Times() {
     const getTimeData = async () => {
       const timeRef = collection(db, "problem", problem, "user")
       const problemRef = doc(db, "problem", problem);
-
       const querySnapshot = await getDocs(timeRef)
-
       const problemSnap = await getDoc(problemRef)
-
       const currentProblemData = problemSnap.data()
       const answer = service.getValue(currentProblemData, "answer", 0)
-      console.log("answer", answer)
-
-
 
       let data: any[] = []
       querySnapshot.forEach((doc) => {
         const userData = doc.data()
+        console.log("userData", userData)
         const userAnswer = userData.selected
-        const userStatus = userData.userProblemStatus
-
-        const everage = Object.keys(userStatus).reduce((result: any, current: any) => {
-
-
-          return result
-        }, 0)
-
-
+        const correctCounts = service.getValue(userData, "correctCounts", 0)
+        const everage = correctCounts / 15
         const isCorrect = userAnswer === answer
-
-        const userObject = { ...userData, answer: answer, isCorrect }
+        const userObject = { ...userData, answer: answer, isCorrect, everage: everage.toFixed(3) }
 
         data.push(userObject)
       });

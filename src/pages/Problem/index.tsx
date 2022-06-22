@@ -23,34 +23,48 @@ export default function Problem() {
   const [options, setOptions] = useState([])
   const [selected, setSelected] = useState(1)
   const [isLast, setIsLast] = useState(false)
+  const [answer, setAnswer] = useState(0)
   const [fontSize, setFontSize] = useState(15)
   const onChange = (e: RadioChangeEvent) => {
     setSelected(e.target.value)
   }
+
+  const getCorrectCounts = (correctCounts: number, problemNumber: number) => {
+
+    console.log("answer", answer)
+    console.log("selected", selected)
+    console.log("answer", problemNumber)
+    console.log("selected", localProblemNumber)
+    if (answer === selected && problemNumber === Number(localProblemNumber)) {
+      return correctCounts + 1
+    }
+    return correctCounts
+  }
+
 
   const onSubmit = async () => {
     const userId = window.localStorage.getItem("userId")
 
     if (userId && localProblemNumber) {
       const userDocRef = doc(db, "users", userId);
-
       const userDocSnapshot = await getDoc(userDocRef)
       const result = userDocSnapshot.data()
-      const userProblemStatus = service.getValue(result, "userProblemStatus", {})
-
-      const addedUserProblemStatus = { ...userProblemStatus, [localProblemNumber]: { selected, createdTime: dayjs().format("YYYY-MM-DD-HH:mm:ss") } }
+      const correctCounts = service.getValue(result, "correctCounts", 0)
+      const problemNumber = service.getValue(result, "problemNumber", 0)
+      const updatedCorrectCounts = getCorrectCounts(correctCounts, problemNumber)
 
 
       await updateDoc(userDocRef, {
-        userProblemStatus: addedUserProblemStatus,
-        problemNumber: isLast ? Number(localProblemNumber) : Number(localProblemNumber) + 1,
+        correctCounts: updatedCorrectCounts,
+        problemNumber: isLast ? Number(localProblemNumber) : Number(problemNumber) + 1,
       })
       const userSnap = await getDoc(userDocRef);
       if (userSnap.exists()) {
         const { name, number } = userSnap.data()
         const userProblemDocRef = doc(db, "problem", localProblemNumber, "user", userId);
+
         await setDoc(userProblemDocRef, {
-          userProblemStatus: addedUserProblemStatus,
+          correctCounts: updatedCorrectCounts,
           id: userId,
           name,
           number,
@@ -78,12 +92,13 @@ export default function Problem() {
         const docSnap = await getDoc(problemRef);
         if (docSnap.exists()) {
           const currentProblemData = docSnap.data()
-          const { problem, options, isLast, fontSize } = currentProblemData
+          const { problem, options, isLast, fontSize, answer } = currentProblemData
           if (problem && options) {
             setFontSize(fontSize)
             setProblem(problem)
             setOptions(options)
             setIsLast(isLast)
+            setAnswer(answer)
           }
         }
       }
