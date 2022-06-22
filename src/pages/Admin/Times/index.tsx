@@ -76,7 +76,7 @@ export default function Times() {
         console.log("userData", userData)
         const userAnswer = userData.selected
         const correctCounts = service.getValue(userData, "correctCounts", 0)
-        const everage = correctCounts / 15
+        const everage = correctCounts / Number(problem)
         const isCorrect = userAnswer === answer
         const userObject = { ...userData, answer: answer, isCorrect, everage: everage.toFixed(3) }
 
