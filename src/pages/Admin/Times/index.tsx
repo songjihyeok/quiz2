@@ -1,23 +1,32 @@
 // import dependency modules : package.json에 명시된 외부모듈을 선언하세요.
-import { Row, Col, Radio, Table } from 'antd';
+import { Row, Col, Radio, Table, Button } from 'antd';
 import styled from 'styled-components';
 import { useState, useEffect } from "react"
 import { doc, getDocs, getDoc, collection } from 'firebase/firestore/lite';
 import { db } from '@src/firebaseConfig'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import dayjs from "dayjs"
+import { CSVLink } from 'react-csv'
 import { service } from '@src/configs'
 dayjs.extend(customParseFormat)
 export default function Times() {
 
   const [problem, setProblem] = useState("1")
   const [data, setData] = useState<any[]>([])
-  console.log(problem)
 
   const onChangeProblem = (e: any) => {
     setProblem(e.target.value)
   }
 
+  const headers = [
+    { label: "문제 넘버", key: "problemNumber" },
+    { label: "사번", key: "number" },
+    { label: "이름", key: "name" },
+    { label: "시간", key: "createdTime" },
+    { label: "선택한 번호", key: "selected" },
+    { label: "문제 답", key: "answer" },
+    { label: "정답여부", key: "isCorrect" },
+  ];
 
 
   const columns = [
@@ -73,12 +82,11 @@ export default function Times() {
       let data: any[] = []
       querySnapshot.forEach((doc) => {
         const userData = doc.data()
-        console.log("userData", userData)
         const userAnswer = userData.selected
         const correctCounts = service.getValue(userData, "correctCounts", 0)
         const everage = correctCounts / Number(problem)
         const isCorrect = userAnswer === answer
-        const userObject = { ...userData, answer: answer, isCorrect, everage: everage.toFixed(3) }
+        const userObject = { ...userData, answer: answer, isCorrect, everage: everage.toFixed(3), problemNumber: problem }
 
         data.push(userObject)
       });
@@ -112,7 +120,19 @@ export default function Times() {
 
 
   return (
-    <Row>
+    <Row gutter={[0, 15]}>
+      <Col span={24} >
+        <CSVLink
+          headers={headers}
+          data={data}
+          filename="users.csv"
+          target="_blank"
+        >
+          <Button > 다운로드
+              </Button>
+        </CSVLink>
+
+      </Col>
       <Col span={24}>
 
         <Radio.Group defaultValue={problem} size="large" onChange={onChangeProblem} style={{ marginBottom: 30 }}>

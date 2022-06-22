@@ -31,10 +31,6 @@ export default function Problem() {
 
   const getCorrectCounts = (correctCounts: number, problemNumber: number) => {
 
-    console.log("answer", answer)
-    console.log("selected", selected)
-    console.log("answer", problemNumber)
-    console.log("selected", localProblemNumber)
     if (answer === selected && problemNumber === Number(localProblemNumber)) {
       return correctCounts + 1
     }
