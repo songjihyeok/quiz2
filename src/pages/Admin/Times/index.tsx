@@ -13,7 +13,7 @@ export default function Times() {
 
   const [problem, setProblem] = useState("1")
   const [data, setData] = useState<any[]>([])
-
+  const [allData, setAllData] = useState<any[]>([])
   const onChangeProblem = (e: any) => {
     setProblem(e.target.value)
   }
@@ -91,8 +91,6 @@ export default function Times() {
         data.push(userObject)
       });
 
-
-
       const sortedData = data.sort((a, b) => {
 
         const AcreatedTime = dayjs(a.createdTime, "YYYY-MM-DD-HH:mm:ss")
@@ -115,6 +113,58 @@ export default function Times() {
   }, [problem])
 
 
+  useEffect(() => {
+    const getTotalData = async () => {
+      let allTotalData: any[] = []
+      for (let i = 1; i < 16; i++) {
+
+        const timeRef = collection(db, "problem", i.toString(), "user")
+        const problemRef = doc(db, "problem", i.toString());
+        const querySnapshot = await getDocs(timeRef)
+        const problemSnap = await getDoc(problemRef)
+        const currentProblemData = problemSnap.data()
+        const answer = service.getValue(currentProblemData, "answer", 0)
+
+        let data: any[] = []
+        querySnapshot.forEach((doc) => {
+          const userData = doc.data()
+          const userAnswer = userData.selected
+          const correctCounts = service.getValue(userData, "correctCounts", 0)
+          const everage = correctCounts / i
+          const isCorrect = userAnswer === answer
+          const userObject = { ...userData, answer: answer, isCorrect, everage: everage.toFixed(3), problemNumber: i }
+
+          data.push(userObject)
+        });
+        const sortedData = data.sort((a, b) => {
+
+          const AcreatedTime = dayjs(a.createdTime, "YYYY-MM-DD-HH:mm:ss")
+          const BcreatedTime = dayjs(b.createdTime, "YYYY-MM-DD-HH:mm:ss")
+
+          const isBefore = dayjs(AcreatedTime).isBefore(BcreatedTime)
+          if (a.createdTime === b.createdTime) {
+            return 0
+          }
+
+          if (isBefore) {
+            return -1
+          } else {
+            return 1
+          }
+        })
+        // console.log("sorted", sortedData)
+        allTotalData.push(...sortedData)
+      }
+      setAllData(allTotalData)
+    }
+    getTotalData()
+  }, [])
+
+
+
+
+
+
 
 
 
@@ -122,6 +172,15 @@ export default function Times() {
   return (
     <Row gutter={[0, 15]}>
       <Col span={24} >
+        <CSVLink
+          headers={headers}
+          data={allData}
+          filename="users.csv"
+          target="_blank"
+        >
+          <Button > 전체 다운로드
+              </Button>
+        </CSVLink>
         <CSVLink
           headers={headers}
           data={data}
